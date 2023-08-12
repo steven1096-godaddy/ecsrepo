@@ -22,7 +22,9 @@ phases:
       - sed -i "s|EXECUTION_ROLE_ARN|${EXECUTION_ROLE_ARN}|g" taskdef.json
       - sed -i "s|TASK_DEFINITION_ARN|${TASK_DEFINITION_ARN}|g" appspec.yaml
       - cat appspec.yaml && cat taskdef.json
+      - printf '[{"name":"web","imageUri":${REPOSITORY_URI}:${IMAGE_TAG}"}]' > imagedefinitions.json
 artifacts:
   files:
     - "appspec.yaml"
     - "taskdef.json"
+    - imagedefinitions.json
